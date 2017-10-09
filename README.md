@@ -105,6 +105,22 @@ class Post extends \yii\db\ActiveRecord
 
 Model `PostTranslation` can be generated using Gii.
 
+With the subsequent removal  `post_id` from `required` rules
+```php
+   /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [[ /* 'post_id', !!! */ 'language'], 'required'],
+            [['post_id'], 'integer'],
+            [['language'], 'string', 'max' => 15],
+            // .....            
+];
+    }
+```
+
 ## Usage
 
 ### Setting translations to the entity
