@@ -147,8 +147,29 @@ class TranslateableBehavior extends Behavior
      */
     public function afterValidate()
     {
-        if (!Model::validateMultiple($this->owner->{$this->translationRelation})) {
-            $this->owner->addError($this->translationRelation);
+        /** @var ActiveRecord[] $translations */
+        $translations = $this->owner->{$this->translationRelation};
+        $attributeNames = null;
+        if (!empty($translations)) { // get 1st, all models are same
+            $attributeNames = array_keys($translations[0]->getAttributes());
+            $attributeNames = array_combine($attributeNames, $attributeNames); // key = value
+            if ($this->owner->getIsNewRecord()) {
+                foreach ($this->owner->getRelation($this->translationRelation)->link as $a => $b) {
+                    //skip FK checks, our record will be saved later and we trust Yii2 it will have correct ID
+                    unset($attributeNames[$a]);
+                }
+            }
+        }
+
+        if (!Model::validateMultiple($translations, $attributeNames)) {
+            $errors = [];
+            foreach ($translations as $model) {
+                if ($model->hasErrors()){
+                    $errors = $model->getErrors();
+                }
+            }
+
+            $this->owner->addError($this->translationRelation, $errors);
         }
     }
 
