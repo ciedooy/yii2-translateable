@@ -1,9 +1,6 @@
 # Translateable Behavior for Yii 2
 
-[![Build Status](https://img.shields.io/travis/creocoder/yii2-translateable/master.svg?style=flat-square)](https://travis-ci.org/creocoder/yii2-translateable)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/creocoder/yii2-translateable/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/creocoder/yii2-translateable/?branch=master)
-[![Code Quality](https://img.shields.io/scrutinizer/g/creocoder/yii2-translateable/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/creocoder/yii2-translateable/?branch=master)
-[![Packagist Version](https://img.shields.io/packagist/v/creocoder/yii2-translateable.svg?style=flat-square)](https://packagist.org/packages/creocoder/yii2-translateable)
+[![Packagist Version](https://img.shields.io/packagist/v/ciedooy/yii2-translateable.svg?style=flat-square)](https://packagist.org/packages/ciedooy/yii2-translateable)
 
 A modern translateable behavior for the Yii framework.
 
@@ -14,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```bash
-$ composer require creocoder/yii2-translateable
+$ composer require ciedooy/yii2-translateable
 ```
 
 or add
 
 ```
-"creocoder/yii2-translateable": "~1.0"
+"ciedooy/yii2-translateable": "~1.0"
 ```
 
 to the `require` section of your `composer.json` file.
