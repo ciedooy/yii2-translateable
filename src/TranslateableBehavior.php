@@ -41,8 +41,8 @@ class TranslateableBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_INIT => 'addTranslations',		    // populate translations on new object
-            ActiveRecord::EVENT_AFTER_FIND => 'addTranslations',	// populate translations on find object
+            ActiveRecord::EVENT_INIT => 'addTranslations',          // populate translations on new object
+            ActiveRecord::EVENT_AFTER_FIND => 'addTranslations',    // populate translations on find object
             ActiveRecord::EVENT_AFTER_VALIDATE => 'afterValidate',
             ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
             ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
@@ -120,22 +120,22 @@ class TranslateableBehavior extends Behavior
 
         return false;
     }
-    
+
     /**
      * Auto populate translation attributes
-     * 
+     *
      * @return void
      */
     public function addTranslations()
-    {	
+    {
         $this->owner->{$this->translationRelation};
-		
+
         /* @var ActiveRecord $class */
         $class = $this->owner->getRelation($this->translationRelation)->modelClass;
-		
-		/* If method create or update - populate attributes */
-		$className = (new \ReflectionClass($class))->getShortName();
-		foreach (Yii::$app->request->post($className, []) as $language => $data) {
+
+        /* If method create or update - populate attributes */
+        $className = (new \ReflectionClass($class))->getShortName();
+        foreach (Yii::$app->request->post($className, []) as $language => $data) {
             foreach ($data as $attribute => $translation) {
                 $this->owner->translate($language)->$attribute = $translation;
             }
@@ -164,7 +164,7 @@ class TranslateableBehavior extends Behavior
         if (!Model::validateMultiple($translations, $attributeNames)) {
             $errors = [];
             foreach ($translations as $model) {
-                if ($model->hasErrors()){
+                if ($model->hasErrors()) {
                     $errors = $model->getErrors();
                 }
             }
