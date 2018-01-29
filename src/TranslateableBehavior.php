@@ -46,6 +46,7 @@ class TranslateableBehavior extends Behavior
             ActiveRecord::EVENT_AFTER_VALIDATE => 'afterValidate',
             ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
             ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
+            ActiveRecord::EVENT_BEFORE_DELETE => 'eventBeforeDelete',
         ];
     }
 
@@ -182,6 +183,11 @@ class TranslateableBehavior extends Behavior
         foreach ($this->owner->{$this->translationRelation} as $translation) {
             $this->owner->link($this->translationRelation, $translation);
         }
+    }
+
+    public function eventBeforeDelete()
+    {
+        $this->owner->unlinkAll($this->translationRelation, true);
     }
 
     /**
