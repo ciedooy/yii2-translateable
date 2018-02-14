@@ -207,12 +207,6 @@ class PostController extends Controller
     {
         $model = new Post();
 
-        foreach (Yii::$app->request->post('PostTranslation', []) as $language => $data) {
-            foreach ($data as $attribute => $translation) {
-                $model->translate($language)->$attribute = $translation;
-            }
-        }
-
         //...
     }
 
@@ -222,12 +216,6 @@ class PostController extends Controller
 
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-
-        foreach (Yii::$app->request->post('PostTranslation', []) as $language => $data) {
-            foreach ($data as $attribute => $translation) {
-                $model->translate($language)->$attribute = $translation;
-            }
         }
 
         //...
