@@ -196,7 +196,9 @@ class TranslateableBehavior extends Behavior
 
     public function eventBeforeDelete()
     {
-        $this->owner->unlinkAll($this->translationRelation, true);
+        foreach ($this->owner->translations as $translation) {
+            $translation->delete();
+        }
     }
 
     /**
